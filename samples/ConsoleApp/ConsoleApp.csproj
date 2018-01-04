@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Vestigen.Extensions.Metrics.Abstractions\Vestigen.Extensions.Metrics.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\Vestigen.Extensions.Metrics.Debug\Vestigen.Extensions.Metrics.Debug.csproj" />
+    <ProjectReference Include="..\..\src\Vestigen.Extensions.Metrics\Vestigen.Extensions.Metrics.csproj" />
+  </ItemGroup>
+</Project>

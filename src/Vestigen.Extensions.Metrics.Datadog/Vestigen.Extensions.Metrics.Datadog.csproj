@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.4;netstandard2.0</TargetFrameworks>
+    <Copyright>Copyright Vestigen 2018</Copyright>
+    <Authors>Vestigen</Authors>
+    <Company>Vestigen, Ltd.</Company>
+    <PackageProjectUrl>https://github.com/VestigenLtd/dotnet-extensions-metrics</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/VestigenLtd/dotnet-extensions-metrics</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageIconUrl>https://avatars2.githubusercontent.com/u/34891219?s=200</PackageIconUrl>
+    <PackageTags>vestigen extensions metrics datadog</PackageTags>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>0.0.0.0</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DogStatsD-CSharp-Client" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="1.1.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Vestigen.Extensions.Metrics.Abstractions\Vestigen.Extensions.Metrics.Abstractions.csproj" />
+  </ItemGroup>
+</Project>
