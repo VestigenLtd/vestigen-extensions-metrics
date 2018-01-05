@@ -1,7 +1,8 @@
 Metrics
 =======
 
-AppVeyor: Coming Soon
+AppVeyor: [![Build status](https://ci.appveyor.com/api/projects/status/f3r19qows4jnko2r/branch/master?svg=true)](https://ci.appveyor.com/project/wholroyd/vestigen-extensions-metrics/branch/master)
+
 
 Travis:   Coming Soon
 
