@@ -8,7 +8,7 @@ namespace Vestigen.Extensions.Metrics.Datadog
         /// <summary>
         /// Adds Datadog as a provider using a specific configuration.
         /// </summary>
-        public static IMetricFactory AddDatadog(this IMetricFactory factory, IDatadogMetricSettings settings)
+        public static IMetricFactory AddDatadogMetrics(this IMetricFactory factory, IDatadogMetricSettings settings)
         {
             factory.AddProvider(new DatadogMetricProvider(settings));
             return factory;
@@ -17,10 +17,10 @@ namespace Vestigen.Extensions.Metrics.Datadog
         /// <summary>
         /// Adds Datadog as a provider using a generic configuration.
         /// </summary>
-        public static IMetricFactory AddDatadog(this IMetricFactory factory,  IConfiguration configuration)
+        public static IMetricFactory AddDatadogMetrics(this IMetricFactory factory,  IConfiguration configuration)
         {
             var settings = new ConfigurationDatadogMetricSettings(configuration);
-            return factory.AddDatadog(settings);
+            return factory.AddDatadogMetrics(settings);
         }
     }
 }

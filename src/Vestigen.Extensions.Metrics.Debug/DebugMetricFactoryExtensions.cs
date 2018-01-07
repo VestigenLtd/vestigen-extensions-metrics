@@ -11,7 +11,7 @@ namespace Vestigen.Extensions.Metrics.Debug
         /// Adds a debug metric that outputs value to the debugger output.
         /// </summary>
         /// <param name="factory">The extension method argument.</param>
-        public static IMetricFactory AddDebug(this IMetricFactory factory)
+        public static IMetricFactory AddDebugMetrics(this IMetricFactory factory)
         {
             factory.AddProvider(new DebugMetricProvider());
             return factory;

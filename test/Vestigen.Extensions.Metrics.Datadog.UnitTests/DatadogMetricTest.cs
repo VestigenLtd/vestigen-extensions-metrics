@@ -80,11 +80,12 @@ namespace Vestigen.Extensions.Metrics.Datadog.UnitTests
         }
 
         [Fact]
-        public void Push_WhenGivenValidTimerData_ReportsTimerData()
+        public void Push_WhenGivenValidTimerDataAnd0ChainOfScopes_ReportsTimerData()
         {
             // Arrange
+            const string statistic = "PushDataTest";
             var service = new Mock<IDogStatsd>();
-            service.Setup(x => x.Timer(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<double>(), It.IsAny<string[]>())).Verifiable();
+            service.Setup(x => x.Timer(statistic, It.IsAny<int>(), It.IsAny<double>(), It.IsAny<string[]>())).Verifiable();
             service.CallBase = true;
             var sut = new DatadogMetric(service.Object);
 
@@ -92,7 +93,28 @@ namespace Vestigen.Extensions.Metrics.Datadog.UnitTests
             sut.Push<int>(MetricType.Timer, "PushDataTest", 1, 1, new string[]{} );
 
             // Assert
-            service.Verify(x => x.Timer(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<double>(), It.IsAny<string[]>()), Times.Once);
+            service.Verify(x => x.Timer(statistic, It.IsAny<int>(), It.IsAny<double>(), It.IsAny<string[]>()), Times.Once);
+        }
+        
+        [Fact]
+        public void Push_WhenGivenValidTimerDataAnd1ChainOfScopes_ReportsTimerData()
+        {
+            // Arrange
+            var scope1 = MetricScope.Push("Scope1");
+            const string statistic = "Scope1.PushDataTest";
+            
+            var service = new Mock<IDogStatsd>();
+            service.Setup(x => x.Timer(statistic, It.IsAny<int>(), It.IsAny<double>(), It.IsAny<string[]>())).Verifiable();
+            service.CallBase = true;
+            
+            var sut = new DatadogMetric(service.Object);
+
+            // Act
+            sut.Push<int>(MetricType.Timer, "PushDataTest", 1, 1, new string[]{} );
+
+            // Assert
+            service.Verify(x => x.Timer(statistic, It.IsAny<int>(), It.IsAny<double>(), It.IsAny<string[]>()), Times.Once);
+            scope1.Dispose();
         }
     }
 }

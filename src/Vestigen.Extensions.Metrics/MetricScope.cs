@@ -43,7 +43,7 @@ namespace Vestigen.Extensions.Metrics
         public static IMetricScope Current
         {
             set => Value.Value = value;
-            get => Value.Value;
+            get => Value.Value ?? (Value.Value = new MetricScope(string.Empty));
         }
 
         public string Name { get; }

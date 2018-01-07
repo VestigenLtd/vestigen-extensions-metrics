@@ -63,6 +63,7 @@ namespace Vestigen.Extensions.Metrics.UnitTests
             new Metric(factory.Object, category);
 
             // Assert
+            // -- Should throw nothing
         }
 
         [Fact]

@@ -1,41 +1,55 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Amazon.CloudWatch;
+using Amazon.CloudWatch.Model;
 using Vestigen.Extensions.Metrics.Abstractions;
 
-namespace Vestigen.Extensions.Metrics.NewRelic
+namespace Vestigen.Extensions.Metrics.CloudWatch
 {
-    public class NewRelicMetric : IMetric
+    public class CloudWatchMetric : IMetric
     {
+        private readonly AmazonCloudWatchClient _service;
+        private readonly string _namespace;
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="NewRelicMetric"/> class using explicit settings.
+        /// Initializes a new instance of the <see cref="CloudWatchMetric"/> class using explicit settings.
         /// </summary>
         /// <param name="prefix">The name of the metric.</param>
-        public NewRelicMetric(string prefix)
-            : this(new NewRelicMetricSettings
-            {
-                MetricPrefix = prefix
-            })
+        public CloudWatchMetric(string @namespace)
+            : this(@namespace, new AmazonCloudWatchClient())
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NewRelicMetric"/> class using a settings class.
+        /// Initializes a new instance of the <see cref="CloudWatchMetric"/> class using a settings class.
         /// </summary>
         /// <param name="settings">The settings class used to configure the metric</param>
-        public NewRelicMetric(INewRelicMetricSettings settings)
+        public CloudWatchMetric(ICloudWatchMetricSettings settings)
+            : this(settings.Namespace)
         {
-            if (settings == null)
-            {
-                throw new ArgumentNullException(nameof(settings));
-            }
-            
-            if (settings.MetricPrefix == null)
-            {
-                throw new ArgumentNullException(nameof(settings.MetricPrefix));
-            }
-            
-            global::NewRelic.Api.Agent.NewRelic.SetApplicationName(settings.MetricPrefix);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CloudWatchMetric"/> class using a <see cref="AmazonCloudWatchConfig"/> instance.
+        /// </summary>
+        /// <param name="prefix">The name of the metric.</param>
+        /// <param name="config">The settings class used to configure the metric</param>
+        public CloudWatchMetric(string @namespace, AmazonCloudWatchConfig config)
+            : this(@namespace, new AmazonCloudWatchClient(config))
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CloudWatchMetric"/> class using a <see cref="AmazonCloudWatchClient"/> instance.
+        /// </summary>
+        /// <param name="prefix">The name of the metric.</param>
+        /// <param name="client">The pre-configured CloudWatch client.</param>
+        public CloudWatchMetric(string @namespace, AmazonCloudWatchClient client)
+        {
+            _namespace = @namespace ?? throw new ArgumentNullException(nameof(@namespace));
+            _service = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         public IDisposable BeginScope<TState>(TState state)
@@ -49,34 +63,57 @@ namespace Vestigen.Extensions.Metrics.NewRelic
             metricBuilder.Append(MetricScope.Current.CompleteName);
             metricBuilder.Append((metricBuilder.Length > 0 ? "." : string.Empty) + statName);
 
+            // Configure tags as dimensions
+            var dimensions = new List<Dimension>();
             if (tags != null)
             {
-                var items = tags.Select(x =>
-                {
-                    var pieces = x.Split(':');
-                    return new {Key = pieces[0], Value = pieces[1]};
-                });
-                
-                foreach (var item in items)
-                {
-                    global::NewRelic.Api.Agent.NewRelic.AddCustomParameter(item.Key, item.Value);
-                }
+                dimensions.AddRange(tags
+                    .Select(tag => tag.Split(':'))
+                    .Select(items => new Dimension
+                    {
+                        Name = items[0],
+                        Value = items[1]
+                    }));
             }
-
+            
+            // Configure the datum to report
+            var datum = new MetricDatum
+            {
+                Dimensions = dimensions,
+                MetricName = metricBuilder.ToString(),
+                Timestamp = DateTime.UtcNow,
+                Value = double.Parse(value.ToString()),
+                StorageResolution = 1
+            };
+            
             switch (type)
             {
                 case MetricType.Timer:
-                    global::NewRelic.Api.Agent.NewRelic.RecordResponseTimeMetric($"Custom/{statName}", long.Parse(value.ToString()));
+                    datum.Unit = StandardUnit.Milliseconds;
+                    break;               
+                case MetricType.Gauge:
+                    datum.Unit = StandardUnit.Percent;
                     break;
                 case MetricType.Counter:
-                case MetricType.Gauge:
                 case MetricType.Histogram:
                 case MetricType.Set:
-                    global::NewRelic.Api.Agent.NewRelic.RecordMetric($"Custom/{statName}", float.Parse(value.ToString()));
+                    datum.Unit = StandardUnit.Count;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
+            
+            // Configure the request object and send it
+            var request = new PutMetricDataRequest
+            {
+                Namespace = _namespace,
+                MetricData = new List<MetricDatum>
+                {
+                    datum
+                }
+            };
+
+            _service.PutMetricDataAsync(request).Wait();
         }
 
         public void Counter<T>(string statName, T value, double sampleRate = 1, string[] tags = null)

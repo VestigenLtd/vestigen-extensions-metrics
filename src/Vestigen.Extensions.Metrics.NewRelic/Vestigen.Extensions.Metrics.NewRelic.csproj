@@ -20,5 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vestigen.Extensions.Metrics.Abstractions\Vestigen.Extensions.Metrics.Abstractions.csproj" />
+    <ProjectReference Include="..\Vestigen.Extensions.Metrics\Vestigen.Extensions.Metrics.csproj">
+      <Project>{24B87E61-262E-4981-9044-236D0687DC86}</Project>
+      <Name>Vestigen.Extensions.Metrics</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -45,7 +45,7 @@ namespace Vestigen.Extensions.Metrics.Datadog
         /// <summary>
         /// Initializes a new instance of the <see cref="DatadogMetric"/> class using a <see cref="DogStatsdService"/> instance.
         /// </summary>
-        /// <param name="service">The </param>
+        /// <param name="service">The pre-configured Datadog statistics service.</param>
         public DatadogMetric(IDogStatsd service)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
@@ -58,19 +58,24 @@ namespace Vestigen.Extensions.Metrics.Datadog
                 throw new ArgumentNullException(nameof(configuration));
             }
 
+            if (configuration.Prefix == null)
+            {
+                throw new ArgumentNullException(nameof(configuration.Prefix));
+            }
+            
             _service = new DogStatsdService();
             _service.Configure(configuration);
         }
 
         public IDisposable BeginScope<TState>(TState state)
         {
-            return DatadogMetricScope.Push(state.ToString());
+            return MetricScope.Push(state.ToString());
         }
 
         public void Push<T>(MetricType type, string statName, T value, double sampleRate, string[] tags)
         {
             var metricBuilder = new StringBuilder();
-            metricBuilder.Append(DatadogMetricScope.Current.CompleteName);
+            metricBuilder.Append(MetricScope.Current.CompleteName);
             metricBuilder.Append((metricBuilder.Length > 0 ? "." : string.Empty) + statName);
 
             switch (type)
