@@ -14,7 +14,7 @@ namespace Vestigen.Extensions.Metrics.NewRelic
         public NewRelicMetric(string prefix)
             : this(new NewRelicMetricSettings
             {
-                MetricPrefix = prefix
+                Prefix = prefix
             })
         {
         }
@@ -30,12 +30,12 @@ namespace Vestigen.Extensions.Metrics.NewRelic
                 throw new ArgumentNullException(nameof(settings));
             }
             
-            if (settings.MetricPrefix == null)
+            if (settings.Prefix == null)
             {
-                throw new ArgumentNullException(nameof(settings.MetricPrefix));
+                throw new ArgumentNullException(nameof(settings.Prefix));
             }
             
-            global::NewRelic.Api.Agent.NewRelic.SetApplicationName(settings.MetricPrefix);
+            global::NewRelic.Api.Agent.NewRelic.SetApplicationName(settings.Prefix);
         }
 
         public IDisposable BeginScope<TState>(TState state)

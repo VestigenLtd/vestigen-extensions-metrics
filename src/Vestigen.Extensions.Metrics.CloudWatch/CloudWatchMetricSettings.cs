@@ -11,6 +11,6 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
             return this;
         }
 
-        public string Namespace { get; set; }
+        public string Prefix { get; set; }
     }
 }

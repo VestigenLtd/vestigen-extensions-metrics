@@ -11,6 +11,6 @@ namespace Vestigen.Extensions.Metrics.NewRelic
             return this;
         }
 
-        public string MetricPrefix { get; set; }
+        public string Prefix { get; set; }
     }
 }

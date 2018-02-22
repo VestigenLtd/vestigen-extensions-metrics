@@ -1,7 +1,5 @@
-using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
-using Vestigen.Extensions.Metrics.CloudWatch;
 
 namespace Vestigen.Extensions.Metrics.CloudWatch
 {
@@ -23,8 +21,6 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
             return new ConfigurationCloudWatchMetricSettings(_configuration);
         }
 
-        public string Prefix => _configuration["MetricPrefix"];
-
-        public string Namespace => _configuration["MetricNamespace"];
+        public string Prefix => _configuration["Prefix"];
     }
 }

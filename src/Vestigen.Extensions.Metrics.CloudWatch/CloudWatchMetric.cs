@@ -10,15 +10,15 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
 {
     public class CloudWatchMetric : IMetric
     {
-        private readonly AmazonCloudWatchClient _service;
-        private readonly string _namespace;
+        private readonly IAmazonCloudWatch _service;
+        private readonly string _prefix;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CloudWatchMetric"/> class using explicit settings.
         /// </summary>
         /// <param name="prefix">The name of the metric.</param>
-        public CloudWatchMetric(string @namespace)
-            : this(@namespace, new AmazonCloudWatchClient())
+        public CloudWatchMetric(string prefix)
+            : this(prefix, new AmazonCloudWatchClient())
         {
         }
 
@@ -27,7 +27,7 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
         /// </summary>
         /// <param name="settings">The settings class used to configure the metric</param>
         public CloudWatchMetric(ICloudWatchMetricSettings settings)
-            : this(settings.Namespace)
+            : this(settings.Prefix)
         {
         }
 
@@ -36,9 +36,24 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
         /// </summary>
         /// <param name="prefix">The name of the metric.</param>
         /// <param name="config">The settings class used to configure the metric</param>
-        public CloudWatchMetric(string @namespace, AmazonCloudWatchConfig config)
-            : this(@namespace, new AmazonCloudWatchClient(config))
+        public CloudWatchMetric(string prefix, AmazonCloudWatchConfig config)
         {
+            if (string.IsNullOrWhiteSpace(prefix))
+            {
+                if (prefix == null)
+                {
+                    throw new ArgumentNullException(nameof(prefix));
+                }
+                throw new ArgumentException("Namespace must not be a non-whitespace value", nameof(prefix));
+            }
+
+            if (config == null)
+            {
+                throw new ArgumentNullException(nameof(config));
+            }
+
+            _prefix = prefix;
+            _service = new AmazonCloudWatchClient(config);
         }
 
         /// <summary>
@@ -46,9 +61,18 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
         /// </summary>
         /// <param name="prefix">The name of the metric.</param>
         /// <param name="client">The pre-configured CloudWatch client.</param>
-        public CloudWatchMetric(string @namespace, AmazonCloudWatchClient client)
+        public CloudWatchMetric(string prefix, IAmazonCloudWatch client)
         {
-            _namespace = @namespace ?? throw new ArgumentNullException(nameof(@namespace));
+            if (string.IsNullOrWhiteSpace(prefix))
+            {
+                if (prefix == null)
+                {
+                    throw new ArgumentNullException(nameof(prefix));
+                }
+                throw new ArgumentException("Namespace must not be a non-whitespace value", nameof(prefix));
+            }
+
+            _prefix = prefix;
             _service = client ?? throw new ArgumentNullException(nameof(client));
         }
 
@@ -106,7 +130,7 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
             // Configure the request object and send it
             var request = new PutMetricDataRequest
             {
-                Namespace = _namespace,
+                Namespace = _prefix,
                 MetricData = new List<MetricDatum>
                 {
                     datum

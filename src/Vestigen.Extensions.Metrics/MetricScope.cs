@@ -1,34 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using Vestigen.Extensions.Metrics.Abstractions;
 
 namespace Vestigen.Extensions.Metrics
 {
-    public class MetricDisposableScopeSet : IDisposable
-    {
-        private readonly List<IDisposable> _scopes;
-
-        public MetricDisposableScopeSet()
-        {
-            _scopes = new List<IDisposable>();
-        }
-
-        public void AddScope(IDisposable disposable)
-        {
-            _scopes.Add(disposable);
-        }
-
-        public void Dispose()
-        {
-            foreach (var scope in _scopes)
-            {
-                scope.Dispose();
-            }
-        }
-    }
-
     public class MetricScope : IMetricScope
     {
         private static readonly AsyncLocal<IMetricScope> Value = new AsyncLocal<IMetricScope>();
@@ -59,7 +35,7 @@ namespace Vestigen.Extensions.Metrics
 
                 while (current != null)
                 {
-                    name = $".{current}{name}";
+                    name = $".{current.Name}{name}";
                     current = current.Parent;
                 }
 

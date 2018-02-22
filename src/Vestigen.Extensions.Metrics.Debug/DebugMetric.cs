@@ -1,7 +1,6 @@
 using System;
 using System.Text;
 using Vestigen.Extensions.Metrics.Abstractions;
-using Vestigen.Extensions.Metrics.Datadog;
 
 namespace Vestigen.Extensions.Metrics.Debug
 {
@@ -32,9 +31,16 @@ namespace Vestigen.Extensions.Metrics.Debug
                 throw new ArgumentNullException(nameof(settings));
             }
 
-            _name = string.IsNullOrWhiteSpace(settings.Prefix)
-                ? nameof(DebugMetric)
-                : settings.Prefix;
+            if (string.IsNullOrWhiteSpace(settings.Prefix))
+            {
+                if (settings.Prefix == null)
+                {
+                    throw new ArgumentNullException(nameof(settings.Prefix));
+                }
+                throw new ArgumentException("Value cannot be empty", nameof(settings.Prefix));
+            }
+
+            _name = settings.Prefix;
         }
 
         /// <inheritdoc />

@@ -48,7 +48,7 @@ namespace Vestigen.Extensions.Metrics.Datadog
         /// <param name="service">The pre-configured Datadog statistics service.</param>
         public DatadogMetric(IDogStatsd service)
         {
-            _service = service ?? throw new ArgumentNullException(nameof(service));
+            _service = service ?? throw new ArgumentNullException(nameof(service));          
         }
 
         private DatadogMetric(StatsdConfig configuration)
@@ -58,9 +58,13 @@ namespace Vestigen.Extensions.Metrics.Datadog
                 throw new ArgumentNullException(nameof(configuration));
             }
 
-            if (configuration.Prefix == null)
+            if (string.IsNullOrWhiteSpace(configuration.Prefix))
             {
-                throw new ArgumentNullException(nameof(configuration.Prefix));
+                if (configuration.Prefix == null)
+                {
+                    throw new ArgumentNullException(nameof(configuration.Prefix));
+                }
+                throw new ArgumentException("Value cannot be empty", nameof(configuration.Prefix));
             }
             
             _service = new DogStatsdService();

@@ -17,18 +17,18 @@ namespace Vestigen.Extensions.Metrics.UnitTests.Internal
             { typeof(List<List<string>>), "System.Collections.Generic.List" },
 
             // Classes inside NonGeneric class
-            { typeof(A), "Holroyd.Extensions.Metrics.Test.Internal.TypeNameSimplifierTest.A" },
-            { typeof(B<int>), "Holroyd.Extensions.Metrics.Test.Internal.TypeNameSimplifierTest.B" },
-            { typeof(C<int, string>), "Holroyd.Extensions.Metrics.Test.Internal.TypeNameSimplifierTest.C" },
-            { typeof(C<int, B<string>>), "Holroyd.Extensions.Metrics.Test.Internal.TypeNameSimplifierTest.C" },
-            { typeof(B<B<string>>), "Holroyd.Extensions.Metrics.Test.Internal.TypeNameSimplifierTest.B" },
+            { typeof(A), "Vestigen.Extensions.Metrics.UnitTests.Internal.TypeNameSimplifierTest.A" },
+            { typeof(B<int>), "Vestigen.Extensions.Metrics.UnitTests.Internal.TypeNameSimplifierTest.B" },
+            { typeof(C<int, string>), "Vestigen.Extensions.Metrics.UnitTests.Internal.TypeNameSimplifierTest.C" },
+            { typeof(C<int, B<string>>), "Vestigen.Extensions.Metrics.UnitTests.Internal.TypeNameSimplifierTest.C" },
+            { typeof(B<B<string>>), "Vestigen.Extensions.Metrics.UnitTests.Internal.TypeNameSimplifierTest.B" },
 
             // Classes inside Generic class
-            { typeof(Outer<int>.D), "Holroyd.Extensions.Metrics.Test.Internal.TypeNameSimplifierTest.Outer.D" },
-            { typeof(Outer<int>.E<int>), "Holroyd.Extensions.Metrics.Test.Internal.TypeNameSimplifierTest.Outer.E" },
-            { typeof(Outer<int>.F<int, string>), "Holroyd.Extensions.Metrics.Test.Internal.TypeNameSimplifierTest.Outer.F" },
-            { typeof(Outer<int>.F<int, Outer<int>.E<string>>),"Holroyd.Extensions.Metrics.Test.Internal.TypeNameSimplifierTest.Outer.F" },
-            { typeof(Outer<int>.E<Outer<int>.E<string>>), "Holroyd.Extensions.Metrics.Test.Internal.TypeNameSimplifierTest.Outer.E" }
+            { typeof(Outer<int>.D), "Vestigen.Extensions.Metrics.UnitTests.Internal.TypeNameSimplifierTest.Outer.D" },
+            { typeof(Outer<int>.E<int>), "Vestigen.Extensions.Metrics.UnitTests.Internal.TypeNameSimplifierTest.Outer.E" },
+            { typeof(Outer<int>.F<int, string>), "Vestigen.Extensions.Metrics.UnitTests.Internal.TypeNameSimplifierTest.Outer.F" },
+            { typeof(Outer<int>.F<int, Outer<int>.E<string>>),"Vestigen.Extensions.Metrics.UnitTests.Internal.TypeNameSimplifierTest.Outer.F" },
+            { typeof(Outer<int>.E<Outer<int>.E<string>>), "Vestigen.Extensions.Metrics.UnitTests.Internal.TypeNameSimplifierTest.Outer.E" }
         };
 
         [Theory]

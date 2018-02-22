@@ -19,7 +19,7 @@ namespace Vestigen.Extensions.Metrics.UnitTests.Abstractions
 
         public IMetric CreateMetric(string name)
         {
-            return new TestMetric(name, new TestSink(), TestMetricThrowsExceptionAt.None, new List<string>() );
+            return new TestMetric(name, _sink, TestMetricThrowsExceptionAt.None, new List<string>() );
         }
 
         public void AddProvider(IMetricProvider provider)

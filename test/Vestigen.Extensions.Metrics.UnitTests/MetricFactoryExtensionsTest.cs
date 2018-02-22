@@ -31,7 +31,7 @@ namespace Vestigen.Extensions.Metrics.UnitTests
         public void CreateMetricOfT_SingleGeneric_CreatesMetricWithNonGenericTypeName()
         {
             // Arrange
-            const string className = "Holroyd.Extensions.Metrics.Test.GenericClass<Holroyd.Extensions.Metrics.Test.TestType>";
+            const string className = "Vestigen.Extensions.Metrics.UnitTests.GenericClass<Vestigen.Extensions.Metrics.UnitTests.TestType>";
             var factory = new Mock<IMetricFactory>();
             factory
                 .Setup(f => f.CreateMetric(It.Is<string>(x => x.Equals(className))))
@@ -48,7 +48,7 @@ namespace Vestigen.Extensions.Metrics.UnitTests
         public void CreateMetricOfT_WhenGivenMultipleTypeArgumentGenericTypeByTypeParameter_CreatesMetricWithNonGenericTypeName()
         {
             // Arrange
-            const string className = "Holroyd.Extensions.Metrics.Test.GenericClass<Holroyd.Extensions.Metrics.Test.TestType, Holroyd.Extensions.Metrics.Test.SecondTestType>";
+            const string className = "Vestigen.Extensions.Metrics.UnitTests.GenericClass<Vestigen.Extensions.Metrics.UnitTests.TestType, Vestigen.Extensions.Metrics.UnitTests.SecondTestType>";
             var factory = new Mock<IMetricFactory>();
             factory
                 .Setup(f => f.CreateMetric(It.Is<string>(x => x.Equals(className))))
@@ -64,7 +64,7 @@ namespace Vestigen.Extensions.Metrics.UnitTests
         public void CreateMetric_WhenGivenMultipleTypeArgumentGenericTypeByReferenceParameter_CreatesMetricWithNonGenericTypeName()
         {
             // Arrange
-            const string className = "Holroyd.Extensions.Metrics.Test.GenericClass";
+            const string className = "Vestigen.Extensions.Metrics.UnitTests.GenericClass";
             var factory = new Mock<IMetricFactory>();
             factory
                 .Setup(f => f.CreateMetric(It.Is<string>(x => x.Equals(className))))
@@ -98,7 +98,7 @@ namespace Vestigen.Extensions.Metrics.UnitTests
         public void CreateMetric_WhenGivenSingleTypeArgumentOfGenericTypeByReferenceParameter_CreatesMetricWithNonGenericTypeName()
         {
             // Arrange
-            const string className = "Holroyd.Extensions.Metrics.Test.GenericClass";
+            const string className = "Vestigen.Extensions.Metrics.UnitTests.GenericClass";
             var factory = new Mock<IMetricFactory>();
             factory
                 .Setup(f => f.CreateMetric(It.Is<string>(x => x.Equals(className))))

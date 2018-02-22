@@ -11,4 +11,10 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Vestigen.Extensions.Metrics.CloudWatch\Vestigen.Extensions.Metrics.CloudWatch.csproj">
+      <Project>{100B1842-EC43-47EB-A278-B30237CDF5E8}</Project>
+      <Name>Vestigen.Extensions.Metrics.CloudWatch</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

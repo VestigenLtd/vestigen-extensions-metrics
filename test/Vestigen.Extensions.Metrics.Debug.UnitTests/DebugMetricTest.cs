@@ -1,24 +1,18 @@
 using System;
-using Vestigen.Extensions.Metrics.Datadog;
 using Xunit;
-using Xunit.Abstractions;
+
+// ReSharper disable ObjectCreationAsStatement
+// ReSharper disable ExpressionIsAlwaysNull
 
 namespace Vestigen.Extensions.Metrics.Debug.UnitTests
 {
     public class DebugMetricTest
-    {
-        private readonly ITestOutputHelper _output;
-
-        public DebugMetricTest(ITestOutputHelper output)
-        {
-            _output = output;
-        }
-        
+    {      
         [Fact]
         public void Constructor_WhenGivenValidName_CreatesInstance()
         {
             // Arrange
-            var name = string.Empty;
+            const string name = "DebugMetric";
 
             // Act
             var sut = new DebugMetric(name);
@@ -31,13 +25,10 @@ namespace Vestigen.Extensions.Metrics.Debug.UnitTests
         public void Constructor_WhenGivenNullName_ThrowsArgumentNullException()
         {
             // Arrange
-            var name = default(string);
+            const string name = default(string);
 
             // Act
-            Action capture = () =>
-            {
-                var sut = new DebugMetric(name);
-            };
+            Action capture = () => new DebugMetric(name);
 
             // Assert
             Assert.Throws<ArgumentNullException>(capture);
@@ -47,7 +38,10 @@ namespace Vestigen.Extensions.Metrics.Debug.UnitTests
         public void Constructor_WhenGivenValidServiceInstance_CreatesInstance()
         {
             // Arrange
-            var settings = new DebugMetricSettings();
+            var settings = new DebugMetricSettings
+            {
+                Prefix = "DebugMetric"
+            };
 
             // Act
             var sut = new DebugMetric(settings);
@@ -63,10 +57,7 @@ namespace Vestigen.Extensions.Metrics.Debug.UnitTests
             var settings = default(IDebugMetricSettings);
 
             // Act
-            Action capture = () =>
-            {
-                var sut = new DebugMetric(settings);
-            };
+            Action capture = () => new DebugMetric(settings);
 
             // Assert
             Assert.Throws<ArgumentNullException>(capture);

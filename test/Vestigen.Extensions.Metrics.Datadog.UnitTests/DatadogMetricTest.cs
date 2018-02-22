@@ -9,28 +9,15 @@ namespace Vestigen.Extensions.Metrics.Datadog.UnitTests
     public class DatadogMetricTest
     {
         [Fact]
-        public void Constructor_WhenGivenValidName_CreatesInstance()
+        public void Constructor_WhenGivenNullPrefix_ThrowsArgumentNullException()
         {
             // Arrange
-            var name = string.Empty;
-
-            // Act
-            var sut = new DatadogMetric(name);
-
-            // Assert
-            Assert.NotNull(sut);
-        }
-
-        [Fact]
-        public void Constructor_WhenGivenNullName_ThrowsArgumentNullException()
-        {
-            // Arrange
-            var name = default(string);
+            var prefix = default(string);
 
             // Act
             Action capture = () =>
             {
-                var sut = new DatadogMetric(name);
+                var sut = new DatadogMetric(prefix);
             };
 
             // Assert
@@ -38,13 +25,45 @@ namespace Vestigen.Extensions.Metrics.Datadog.UnitTests
         }
         
         [Fact]
-        public void Constructor_WhenGivenValidServiceInstance_CreatesInstance()
+         public void Constructor_WhenGivenEmptyPrefix_ThrowsArgumentException()
+         {
+             // Arrange
+             var prefix = string.Empty;
+ 
+             // Act
+             Action capture = () =>
+             {
+                 var sut = new DatadogMetric(prefix);
+             };
+ 
+             // Assert
+             Assert.Throws<ArgumentException>(capture);
+         }
+        
+        [Fact]
+        public void Constructor_WhenGivenWhitespacePrefix_ThrowsArgumentException()
         {
             // Arrange
-            var service = new Mock<IDogStatsd>();
+            var prefix = "   ";
+         
+            // Act
+            Action capture = () =>
+            {
+                var sut = new DatadogMetric(prefix);
+            };
+         
+            // Assert
+            Assert.Throws<ArgumentException>(capture);
+        }
+        
+        [Fact]
+        public void Constructor_WhenGivenValidPrefix_CreatesInstance()
+        {
+            // Arrange
+            var prefix = "Vestigen";
 
             // Act
-            var sut = new DatadogMetric(service.Object);
+            var sut = new DatadogMetric(prefix);
 
             // Assert
             Assert.NotNull(sut);
@@ -65,6 +84,19 @@ namespace Vestigen.Extensions.Metrics.Datadog.UnitTests
             // Assert
             Assert.Throws<ArgumentNullException>(capture);
         }
+        
+        [Fact]
+        public void Constructor_WhenGivenValidServiceInstance_CreatesInstance()
+        {
+            // Arrange
+            var service = new Mock<IDogStatsd>();
+
+            // Act
+            var sut = new DatadogMetric(service.Object);
+
+            // Assert
+            Assert.NotNull(sut);
+        }       
 
         [Fact]
         public void Constructor_WhenGivenStaticMetricSettingsWithMetricNameOnly_CreatesInstance()
@@ -86,7 +118,6 @@ namespace Vestigen.Extensions.Metrics.Datadog.UnitTests
             const string statistic = "PushDataTest";
             var service = new Mock<IDogStatsd>();
             service.Setup(x => x.Timer(statistic, It.IsAny<int>(), It.IsAny<double>(), It.IsAny<string[]>())).Verifiable();
-            service.CallBase = true;
             var sut = new DatadogMetric(service.Object);
 
             // Act

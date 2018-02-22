@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Primitives;
-using Vestigen.Extensions.Metrics.Debug;
 
-namespace Vestigen.Extensions.Metrics.Datadog
+namespace Vestigen.Extensions.Metrics.Debug
 {
     public class DebugMetricSettings : IDebugMetricSettings
     {

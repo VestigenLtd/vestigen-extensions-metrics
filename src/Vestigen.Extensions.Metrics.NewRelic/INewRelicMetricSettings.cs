@@ -8,6 +8,6 @@ namespace Vestigen.Extensions.Metrics.NewRelic
 
         INewRelicMetricSettings Reload();
 
-        string MetricPrefix { get; }
+        string Prefix { get; }
     }
 }

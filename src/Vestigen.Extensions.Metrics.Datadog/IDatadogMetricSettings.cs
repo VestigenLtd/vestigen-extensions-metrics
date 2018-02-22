@@ -15,6 +15,5 @@ namespace Vestigen.Extensions.Metrics.Datadog
         int? AgentPort { get; }
 
         int? AgentPacketSize { get; }
-
     }
 }

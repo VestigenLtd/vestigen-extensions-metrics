@@ -1,9 +1,23 @@
 Metrics
 =======
 
-AppVeyor: [![Build status](https://ci.appveyor.com/api/projects/status/f3r19qows4jnko2r/branch/master?svg=true)](https://ci.appveyor.com/project/wholroyd/vestigen-extensions-metrics/branch/master)
+AppVeyor on master:
 
-Travis:   [![Build status](https://api.travis-ci.org/VestigenLtd/vestigen-extensions-metrics.svg?branch=master)](https://ci.appveyor.com/project/wholroyd/vestigen-extensions-metrics/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/f3r19qows4jnko2r/branch/master?svg=true)](https://ci.appveyor.com/project/wholroyd/vestigen-extensions-metrics/branch/master)
+
+[![AppVeyor build](https://img.shields.io/appveyor/ci/vestigenltd/vestigen-extensions-metrics/master.svg?logo=appveyor)](https://ci.appveyor.com/project/vestigenLtd/vestigen-extensions-metrics/branch/master)
+
+[![AppVeyor tests](https://img.shields.io/appveyor/tests/vestigenltd/vestigen-extensions-metrics/master.svg?logo=appveyor)](https://ci.appveyor.com/project/vestigenLtd/vestigen-extensions-metrics/branch/master/tests)
+
+
+AppVeyor on develop:
+
+[![Build status](https://ci.appveyor.com/api/projects/status/f3r19qows4jnko2r/branch/develop?svg=true)](https://ci.appveyor.com/project/VestigenLtd/vestigen-extensions-metrics/branch/develop)
+
+[![AppVeyor build](https://img.shields.io/appveyor/ci/vestigenltd/vestigen-extensions-metrics/develop.svg?logo=appveyor)](https://ci.appveyor.com/project/vestigenLtd/vestigen-extensions-metrics/branch/develop)
+
+[![AppVeyor tests](https://img.shields.io/appveyor/tests/vestigenltd/vestigen-extensions-metrics/develop.svg?logo=appveyor)](https://ci.appveyor.com/project/vestigenLtd/vestigen-extensions-metrics/branch/develop/tests)
+
 
 Metrics is a framework and set of abstractions for publishing metrics in an application using providers for Datadog, NewRelic, CloudWatch, and simple debug output, based on StatsD-like interface.
 
