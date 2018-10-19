@@ -1,45 +1,44 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Text;
+using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.DataContracts;
+using Microsoft.ApplicationInsights.Extensibility;
 using Vestigen.Extensions.Metrics.Abstractions;
 
-namespace Vestigen.Extensions.Metrics.NewRelic
+namespace Vestigen.Extensions.Metrics.ApplicationInsights
 {
-    public class NewRelicMetric : IMetric
+    public class ApplicationInsightsMetric : IMetric
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NewRelicMetric"/> class using explicit settings.
-        /// </summary>
-        /// <param name="prefix">The name of the metric.</param>
-        public NewRelicMetric(string prefix)
-            : this(new NewRelicMetricSettings
-            {
-                Prefix = prefix
-            })
-        {
-        }
+        private readonly TelemetryClient _service;
+        private readonly string _prefix;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NewRelicMetric"/> class using a settings class.
+        /// Initializes a new instance of the <see cref="CloudWatchMetric"/> class using explicit settings.
         /// </summary>
-        /// <param name="settings">The settings class used to configure the metric</param>
-        public NewRelicMetric(INewRelicMetricSettings settings)
+        /// <param name="prefix">The name of the metric.</param>
+        public ApplicationInsightsMetric(string prefix)
+            : this(prefix, new TelemetryClient(TelemetryConfiguration.Active))
         {
-            if (settings == null)
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationInsightsMetric"/> class using a <see cref="TelemetryClient"/> instance.
+        /// </summary>
+        /// <param name="service">The pre-configured ApplicationInsights statistics service.</param>
+        public ApplicationInsightsMetric(string prefix, TelemetryClient client)
+        {
+            if (string.IsNullOrWhiteSpace(prefix))
             {
-                throw new ArgumentNullException(nameof(settings));
-            }
-            
-            if (string.IsNullOrWhiteSpace(settings.Prefix))
-            {
-                if (settings.Prefix == null)
+                if (prefix == null)
                 {
-                    throw new ArgumentNullException(nameof(settings.Prefix));
+                    throw new ArgumentNullException(nameof(prefix));
                 }
-                throw new ArgumentException("Value cannot be empty", nameof(settings.Prefix));
+                throw new ArgumentException("Namespace must not be a non-whitespace value", nameof(prefix));
             }
-            
-            global::NewRelic.Api.Agent.NewRelic.SetApplicationName(settings.Prefix);
+
+            _prefix = prefix;
+            _service = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         public IDisposable BeginScope<TState>(TState state)
@@ -49,40 +48,39 @@ namespace Vestigen.Extensions.Metrics.NewRelic
 
         public void Push<T>(MetricType type, string statName, T value, double sampleRate, string[] tags)
         {
-            var metricBuilder = new StringBuilder();
-            metricBuilder.Append(MetricScope.Current.CompleteName);
-            metricBuilder.Append((metricBuilder.Length > 0 ? "." : string.Empty) + statName);
-
-            var metricName = metricBuilder.ToString();
-
-            if (tags != null)
-            {
-                var items = tags.Select(x =>
-                {
-                    var pieces = x.Split(':');
-                    return new {Key = pieces[0], Value = pieces[1]};
-                });
-                
-                foreach (var item in items)
-                {
-                    global::NewRelic.Api.Agent.NewRelic.AddCustomParameter(item.Key, item.Value);
-                }
-            }
+            var metricValue = double.Parse(value.ToString());
 
             switch (type)
             {
                 case MetricType.Timer:
-                    global::NewRelic.Api.Agent.NewRelic.RecordResponseTimeMetric($"Custom/{metricName}", long.Parse(value.ToString()));
-                    break;
                 case MetricType.Counter:
                 case MetricType.Gauge:
                 case MetricType.Histogram:
                 case MetricType.Set:
-                    global::NewRelic.Api.Agent.NewRelic.RecordMetric($"Custom/{metricName}", float.Parse(value.ToString()));
+                    Push(statName, metricValue, tags);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
+        }
+
+        private void Push(string statName, double value, IEnumerable<string> tags)
+        {
+            var metricBuilder = new StringBuilder();
+            metricBuilder.Append(MetricScope.Current.CompleteName);
+            metricBuilder.Append((metricBuilder.Length > 0 ? "." : string.Empty) + statName);
+            
+            var metric = new MetricTelemetry(metricBuilder.ToString(), value);
+            if (tags != null)
+            {
+                foreach (var tag in tags)
+                {
+                    var pieces = tag.Split(':');
+                    metric.Properties.Add(pieces[0], pieces[1]);
+                }
+            }
+
+            _service.TrackMetric(metric);
         }
 
         public void Counter<T>(string statName, T value, double sampleRate = 1, string[] tags = null)
@@ -92,12 +90,12 @@ namespace Vestigen.Extensions.Metrics.NewRelic
 
         public void Increment(string statName, int value = 1, double sampleRate = 1, string[] tags = null)
         {
-            Push(MetricType.Counter, statName, value, sampleRate, tags);
+            Push(statName, value, tags);
         }
 
         public void Decrement(string statName, int value = 1, double sampleRate = 1, params string[] tags)
         {
-            Push(MetricType.Counter, statName, value, sampleRate, tags);
+            Push(statName, value, tags);
         }
 
         public void Gauge<T>(string statName, T value, double sampleRate = 1, string[] tags = null)

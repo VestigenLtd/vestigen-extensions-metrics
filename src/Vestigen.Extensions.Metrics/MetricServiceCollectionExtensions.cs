@@ -21,7 +21,11 @@ namespace Vestigen.Extensions.Metrics
             {
                 throw new ArgumentNullException(nameof(services));
             }
-
+            
+            // Add the five options types
+            services.AddOptions();
+    
+            // Add just our two
             services.TryAdd(ServiceDescriptor.Singleton<IMetricFactory, MetricFactory>());
             services.TryAdd(ServiceDescriptor.Singleton(typeof(IMetric<>), typeof(Metric<>)));
 

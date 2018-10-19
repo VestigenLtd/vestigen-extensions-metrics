@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using Amazon;
 using Vestigen.Extensions.Metrics.Abstractions;
 
 namespace Vestigen.Extensions.Metrics.CloudWatch
@@ -27,12 +28,21 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
 
         public IMetric CreateMetric(string name)
         {
-            return _metrics.GetOrAdd(name, CreateMetricImplementation);
+            return _metrics.GetOrAdd(name, x => CreateMetricImplementation(name));
         }
 
         private CloudWatchMetric CreateMetricImplementation(string name)
         {
-            return new CloudWatchMetric(name);
+            RegionEndpoint region;
+            try
+            {
+                region = Enum.Parse(typeof(RegionEndpoint), _settings.Region) as RegionEndpoint;
+            }
+            catch
+            {
+                region = RegionEndpoint.USEast1;
+            }
+            return new CloudWatchMetric(name, region);
         }
 
         public void Dispose()

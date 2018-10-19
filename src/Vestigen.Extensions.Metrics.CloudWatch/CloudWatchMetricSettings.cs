@@ -12,5 +12,7 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
         }
 
         public string Prefix { get; set; }
+        
+        public string Region { get; set; }
     }
 }

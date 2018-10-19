@@ -14,14 +14,15 @@ namespace ConsoleApp
         private static void Usage()
         {
             // Using the metric factory allows you to register multiple providers and publish to
-            // all of them simoultaneously. Useful in scenarios where you need to migrate between
-            // platforms without making a hard cutover between systems.
+            // all of them simultaneously. Useful in scenarios where you need to migrate between
+            // platforms without making a hard cut-over between systems.
             
             var factory = new MetricFactory();
             //factory.AddProvider(new DatadogMetricProvider());
             //factory.AddProvider(new NewRelicMetricProvider());
             //factory.AddProvider(new CloudWatchMetricProvider());
             //factory.AddProvider(new PrometheusMetricProvider());
+            //factory.AddProvider(new ApplicationInsightsMetricProvider());
 
             var usageByNameParameter = factory.CreateMetric("MetricFactory usage");
             var usageByTypeParameter = factory.CreateMetric<Program>();

@@ -7,7 +7,7 @@
     <RepositoryUrl>https://github.com/VestigenLtd/dotnet-extensions-metrics</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageIconUrl>https://avatars2.githubusercontent.com/u/34891219?s=200</PackageIconUrl>
-    <PackageTags>vestigen extensions metrics debug</PackageTags>
+    <PackageTags>vestigen extensions metrics ApplicationInsights</PackageTags>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <Version>0.0.0.0</Version>
@@ -15,9 +15,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.8.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.Agent_x64" Version="2.2.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vestigen.Extensions.Metrics.Abstractions\Vestigen.Extensions.Metrics.Abstractions.csproj" />
+    <ProjectReference Include="..\Vestigen.Extensions.Metrics\Vestigen.Extensions.Metrics.csproj">
+      <Project>{24B87E61-262E-4981-9044-236D0687DC86}</Project>
+      <Name>Vestigen.Extensions.Metrics</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

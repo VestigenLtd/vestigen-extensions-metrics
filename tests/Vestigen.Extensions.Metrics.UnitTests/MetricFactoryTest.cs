@@ -7,6 +7,8 @@ namespace Vestigen.Extensions.Metrics.UnitTests
 {
     public class MetricFactoryTest
     {
+        
+        
         [Fact]
         public void AddProvider_WhenInstanceIsDisposed_ThrowsObjectDisposedException()
         {
@@ -104,6 +106,20 @@ namespace Vestigen.Extensions.Metrics.UnitTests
 
             // Assert
             Assert.Throws<ObjectDisposedException>(() => factory.CreateMetric("disposedMatric"));
+        }
+
+        [Fact]
+        public void CreateMetric_WhenCalledOnSameCategory_ReturnsSameMetric()
+        {
+            // Arrange
+            var factory = new MetricFactory();
+            
+            // Act
+            var metric1 = factory.CreateMetric("metric");
+            var metric2 = factory.CreateMetric("metric");
+
+            // Assert
+            Assert.Same(metric1, metric2);
         }
 
         [Fact]

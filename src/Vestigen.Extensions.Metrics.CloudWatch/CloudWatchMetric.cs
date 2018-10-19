@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Amazon;
 using Amazon.CloudWatch;
 using Amazon.CloudWatch.Model;
 using Vestigen.Extensions.Metrics.Abstractions;
@@ -17,8 +18,8 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
         /// Initializes a new instance of the <see cref="CloudWatchMetric"/> class using explicit settings.
         /// </summary>
         /// <param name="prefix">The name of the metric.</param>
-        public CloudWatchMetric(string prefix)
-            : this(prefix, new AmazonCloudWatchClient())
+        public CloudWatchMetric(string prefix, RegionEndpoint region)
+            : this(prefix, new AmazonCloudWatchClient(region ?? RegionEndpoint.USEast1))
         {
         }
 
@@ -27,7 +28,7 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
         /// </summary>
         /// <param name="settings">The settings class used to configure the metric</param>
         public CloudWatchMetric(ICloudWatchMetricSettings settings)
-            : this(settings.Prefix)
+            : this(settings.Prefix, Enum.Parse(typeof(RegionEndpoint), settings.Region) as RegionEndpoint)
         {
         }
 

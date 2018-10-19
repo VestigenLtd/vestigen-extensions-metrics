@@ -83,7 +83,7 @@ namespace Vestigen.Extensions.Metrics.UnitTests
             var fullName = typeof(GenericClass<string>).GetGenericTypeDefinition().FullName;
             var fullNameWithoutBacktick = fullName.Substring(0, fullName.IndexOf('`'));
             var testSink = new TestSink();
-            var factory = new TestMetricFactory(testSink, true);
+            var factory = new TestMetricFactory(testSink);
 
             // Act
             var metric = factory.CreateMetric<GenericClass<string>>();
@@ -117,7 +117,7 @@ namespace Vestigen.Extensions.Metrics.UnitTests
             var fullName = typeof(GenericClass<GenericClass<string>>).GetGenericTypeDefinition().FullName;
             var fullNameWithoutBacktick = fullName.Substring(0, fullName.IndexOf('`'));
             var testSink = new TestSink();
-            var factory = new TestMetricFactory(testSink, true);
+            var factory = new TestMetricFactory(testSink);
 
             // Act
             var metric = factory.CreateMetric<GenericClass<GenericClass<string>>>();
@@ -135,7 +135,7 @@ namespace Vestigen.Extensions.Metrics.UnitTests
             var fullName = typeof(GenericClass<string, string>).GetGenericTypeDefinition().FullName;
             var fullNameWithoutBacktick = fullName.Substring(0, fullName.IndexOf('`'));
             var testSink = new TestSink();
-            var factory = new TestMetricFactory(testSink, true);
+            var factory = new TestMetricFactory(testSink);
 
             // Act
             var metric = factory.CreateMetric<GenericClass<string, string>>();

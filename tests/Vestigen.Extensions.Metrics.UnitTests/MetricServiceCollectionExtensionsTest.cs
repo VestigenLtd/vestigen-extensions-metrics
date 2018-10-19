@@ -15,11 +15,11 @@ namespace Vestigen.Extensions.Metrics.UnitTests
             var services = new ServiceCollection();
 
             // Act
-            var capture = MetricServiceCollectionExtensions.AddMetrics(services);
+            var capture = services.AddMetrics();
 
             // Assert
             Assert.NotNull(capture);
-            Assert.Equal(2, capture.Count);
+            Assert.Equal(7, capture.Count);
         }
 
         [Fact]

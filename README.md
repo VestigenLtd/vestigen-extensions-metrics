@@ -18,7 +18,6 @@ AppVeyor on develop:
 
 [![AppVeyor tests](https://img.shields.io/appveyor/tests/vestigenltd/vestigen-extensions-metrics/develop.svg?logo=appveyor)](https://ci.appveyor.com/project/vestigenLtd/vestigen-extensions-metrics/branch/develop/tests)
 
-
 Metrics is a framework and set of abstractions for publishing metrics in an application using providers for Datadog, NewRelic, CloudWatch, and simple debug output, based on StatsD-like interface.
 
 Overview

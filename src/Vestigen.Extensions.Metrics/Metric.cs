@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Vestigen.Extensions.Metrics.Abstractions;
 
 namespace Vestigen.Extensions.Metrics
@@ -97,7 +98,7 @@ namespace Vestigen.Extensions.Metrics
 
             if (exceptions != null && exceptions.Count > 0)
             {
-                throw new AggregateException("An error occurred attepting to report metric", exceptions);
+                throw new AggregateException("An error occurred attempting to report metric", exceptions);
             }
         }
 
@@ -163,7 +164,5 @@ namespace Vestigen.Extensions.Metrics
 
             _metrics.Add(metric);
         }
-
-        
     }
 }

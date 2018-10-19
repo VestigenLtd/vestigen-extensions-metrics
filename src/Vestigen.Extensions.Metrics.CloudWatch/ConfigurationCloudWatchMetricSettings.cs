@@ -22,5 +22,7 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
         }
 
         public string Prefix => _configuration["Prefix"];
+
+        public string Region => _configuration["Region"];
     }
 }

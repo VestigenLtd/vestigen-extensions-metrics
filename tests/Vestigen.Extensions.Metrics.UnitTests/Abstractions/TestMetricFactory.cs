@@ -6,14 +6,12 @@ namespace Vestigen.Extensions.Metrics.UnitTests.Abstractions
     public class TestMetricFactory : IMetricFactory
     {
         private readonly ITestSink _sink;
-        private readonly bool _enabled;
         private bool _disposed;
         private readonly List<IMetricProvider> _providers;
 
-        public TestMetricFactory(ITestSink sink, bool enabled)
+        public TestMetricFactory(ITestSink sink)
         {
             _sink = sink;
-            _enabled = enabled;
             _providers = new List<IMetricProvider>();
         }
 

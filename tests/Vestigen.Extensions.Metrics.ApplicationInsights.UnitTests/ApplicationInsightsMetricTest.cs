@@ -1,18 +1,17 @@
 ﻿using System;
-using Amazon.CloudWatch;
-using Amazon.Runtime;
-using Moq;
+using Microsoft.ApplicationInsights;
+using Vestigen.Extensions.Metrics.ApplicationInsights;
 using Xunit;
 
 // ReSharper disable ObjectCreationAsStatement
 
 namespace Vestigen.Extensions.Metrics.CloudWatch.UnitTests
 {
-    public class CloudWatchMetricTest : IClassFixture<CloudWatchMetricTestFixture>, IDisposable
+    public class ApplicationInsightsMetricTest : IClassFixture<ApplicationInsightsMetricTestFixture>, IDisposable
     {
-        private readonly CloudWatchMetricTestFixture _fixture;
+        private readonly ApplicationInsightsMetricTestFixture _fixture;
 
-        public CloudWatchMetricTest(CloudWatchMetricTestFixture fixture)
+        public ApplicationInsightsMetricTest(ApplicationInsightsMetricTestFixture fixture)
         {
             // See remarks on CloudWatchMetricTestFixture for why this is here
             _fixture = fixture;
@@ -30,7 +29,7 @@ namespace Vestigen.Extensions.Metrics.CloudWatch.UnitTests
             const string ns = default(string);
 
             // Act
-            Action capture = () => new CloudWatchMetric(ns);
+            Action capture = () => new ApplicationInsightsMetric(ns);
 
             // Assert
             Assert.Throws<ArgumentNullException>(capture);
@@ -43,7 +42,7 @@ namespace Vestigen.Extensions.Metrics.CloudWatch.UnitTests
             var ns = string.Empty;
 
             // Act
-            Action capture = () => new CloudWatchMetric(ns);
+            Action capture = () => new ApplicationInsightsMetric(ns);
 
             // Assert
             Assert.Throws<ArgumentException>(capture);
@@ -56,7 +55,7 @@ namespace Vestigen.Extensions.Metrics.CloudWatch.UnitTests
             const string ns = "Vestigen/";
 
             // Act
-            var sut = new CloudWatchMetric(ns);
+            var sut = new ApplicationInsightsMetric(ns);
 
             // Assert
             Assert.NotNull(sut);
@@ -75,7 +74,7 @@ namespace Vestigen.Extensions.Metrics.CloudWatch.UnitTests
             const string ns = "Vestigen/";
 
             // Act
-            Action capture = () => new CloudWatchMetric(ns, config: null);
+            Action capture = () => new ApplicationInsightsMetric(ns, null);
 
             // Assert
             Assert.Throws<ArgumentNullException>(capture);
@@ -86,10 +85,10 @@ namespace Vestigen.Extensions.Metrics.CloudWatch.UnitTests
         {
             // Arrange
             const string ns = "Vestigen/";
-            var config = new AmazonCloudWatchConfig();
+            var config = new TelemetryClient();
 
             // Act
-            var sut = new CloudWatchMetric(ns, config);
+            var sut = new ApplicationInsightsMetric(ns, config);
 
             // Assert
             Assert.NotNull(sut);
@@ -102,7 +101,7 @@ namespace Vestigen.Extensions.Metrics.CloudWatch.UnitTests
             const string ns = "Vestigen/";
 
             // Act
-            Action capture = () => new CloudWatchMetric(ns, client: null);
+            Action capture = () => new ApplicationInsightsMetric(ns, null);
 
             // Assert
             Assert.Throws<ArgumentNullException>(capture);
@@ -113,10 +112,10 @@ namespace Vestigen.Extensions.Metrics.CloudWatch.UnitTests
         {
             // Arrange
             const string ns = "Vestigen/";
-            var client = new Mock<IAmazonCloudWatch>(); //AmazonCloudWatchClient();
+            var config = new TelemetryClient();
 
             // Act
-            var sut = new CloudWatchMetric(ns, client.Object);
+            var sut = new ApplicationInsightsMetric(ns, config);
 
             // Assert
             Assert.NotNull(sut);

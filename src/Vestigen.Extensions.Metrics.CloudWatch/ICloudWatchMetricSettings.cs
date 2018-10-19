@@ -9,5 +9,7 @@ namespace Vestigen.Extensions.Metrics.CloudWatch
         ICloudWatchMetricSettings Reload();
 
         string Prefix { get; }
+        
+        string Region { get; }
     }
 }

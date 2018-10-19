@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3593D8FC-40A8-46FF-BBFA-6F08832EC116}"
 EndProject
@@ -19,19 +19,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics", "src\Vestigen.Extensions.Metrics\Vestigen.Extensions.Metrics.csproj", "{24B87E61-262E-4981-9044-236D0687DC86}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics.Datadog.UnitTests", "test\Vestigen.Extensions.Metrics.Datadog.UnitTests\Vestigen.Extensions.Metrics.Datadog.UnitTests.csproj", "{E9DF7752-A1EC-438A-8CD9-1F34A217C8A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics.Datadog.UnitTests", "tests\Vestigen.Extensions.Metrics.Datadog.UnitTests\Vestigen.Extensions.Metrics.Datadog.UnitTests.csproj", "{E9DF7752-A1EC-438A-8CD9-1F34A217C8A2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics.UnitTests", "test\Vestigen.Extensions.Metrics.UnitTests\Vestigen.Extensions.Metrics.UnitTests.csproj", "{9716C92F-8662-40DC-8316-0B95BAC30212}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics.UnitTests", "tests\Vestigen.Extensions.Metrics.UnitTests\Vestigen.Extensions.Metrics.UnitTests.csproj", "{9716C92F-8662-40DC-8316-0B95BAC30212}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics.NewRelic.UnitTests", "test\Vestigen.Extensions.Metrics.NewRelic.UnitTests\Vestigen.Extensions.Metrics.NewRelic.UnitTests.csproj", "{61AD7A8F-A9A2-4D50-9E13-5668A58769D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics.NewRelic.UnitTests", "tests\Vestigen.Extensions.Metrics.NewRelic.UnitTests\Vestigen.Extensions.Metrics.NewRelic.UnitTests.csproj", "{61AD7A8F-A9A2-4D50-9E13-5668A58769D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics.CloudWatch.UnitTests", "test\Vestigen.Extensions.Metrics.CloudWatch.UnitTests\Vestigen.Extensions.Metrics.CloudWatch.UnitTests.csproj", "{EF80491E-C826-4103-9F9C-24473AB5E113}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics.CloudWatch.UnitTests", "tests\Vestigen.Extensions.Metrics.CloudWatch.UnitTests\Vestigen.Extensions.Metrics.CloudWatch.UnitTests.csproj", "{EF80491E-C826-4103-9F9C-24473AB5E113}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics.Debug.UnitTests", "test\Vestigen.Extensions.Metrics.Debug.UnitTests\Vestigen.Extensions.Metrics.Debug.UnitTests.csproj", "{6620E6DF-30E9-4842-8AF5-486B52439401}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics.Debug.UnitTests", "tests\Vestigen.Extensions.Metrics.Debug.UnitTests\Vestigen.Extensions.Metrics.Debug.UnitTests.csproj", "{6620E6DF-30E9-4842-8AF5-486B52439401}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{51DA7BC3-BB40-4A10-B6D0-0C3841ECD7F8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7CA1EFF1-8307-43B7-A9E0-21B392CD5E35}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vestigen.Extensions.Metrics.ApplicationInsights", "src\Vestigen.Extensions.Metrics.ApplicationInsights\Vestigen.Extensions.Metrics.ApplicationInsights.csproj", "{1FDD78E2-5600-443B-A96A-1B226F24F648}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vestigen.Extensions.Metrics.ApplicationInsights.UnitTests", "tests\Vestigen.Extensions.Metrics.ApplicationInsights.UnitTests\Vestigen.Extensions.Metrics.ApplicationInsights.UnitTests.csproj", "{9437A244-6B71-4140-86E1-5D6EA07F26F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +91,14 @@ Global
 		{6620E6DF-30E9-4842-8AF5-486B52439401}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6620E6DF-30E9-4842-8AF5-486B52439401}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6620E6DF-30E9-4842-8AF5-486B52439401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FDD78E2-5600-443B-A96A-1B226F24F648}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FDD78E2-5600-443B-A96A-1B226F24F648}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FDD78E2-5600-443B-A96A-1B226F24F648}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FDD78E2-5600-443B-A96A-1B226F24F648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9437A244-6B71-4140-86E1-5D6EA07F26F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9437A244-6B71-4140-86E1-5D6EA07F26F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9437A244-6B71-4140-86E1-5D6EA07F26F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9437A244-6B71-4140-86E1-5D6EA07F26F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +116,8 @@ Global
 		{61AD7A8F-A9A2-4D50-9E13-5668A58769D7} = {7CA1EFF1-8307-43B7-A9E0-21B392CD5E35}
 		{EF80491E-C826-4103-9F9C-24473AB5E113} = {7CA1EFF1-8307-43B7-A9E0-21B392CD5E35}
 		{6620E6DF-30E9-4842-8AF5-486B52439401} = {7CA1EFF1-8307-43B7-A9E0-21B392CD5E35}
+		{1FDD78E2-5600-443B-A96A-1B226F24F648} = {3593D8FC-40A8-46FF-BBFA-6F08832EC116}
+		{9437A244-6B71-4140-86E1-5D6EA07F26F2} = {7CA1EFF1-8307-43B7-A9E0-21B392CD5E35}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2B9BDD6-DE9C-4103-8DC9-561ABD5D5785}
