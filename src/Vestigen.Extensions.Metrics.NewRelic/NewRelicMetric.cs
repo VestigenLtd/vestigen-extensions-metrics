@@ -62,23 +62,24 @@ namespace Vestigen.Extensions.Metrics.NewRelic
                     var pieces = x.Split(':');
                     return new {Key = pieces[0], Value = pieces[1]};
                 });
-                
+                var agent = global::NewRelic.Api.Agent.NewRelic.GetAgent();
+                var transaction = agent.CurrentTransaction;
                 foreach (var item in items)
                 {
-                    global::NewRelic.Api.Agent.NewRelic.AddCustomParameter(item.Key, item.Value);
+                    transaction.AddCustomAttribute(item.Key, item.Value);
                 }
             }
 
             switch (type)
             {
                 case MetricType.Timer:
-                    global::NewRelic.Api.Agent.NewRelic.RecordResponseTimeMetric($"Custom/{metricName}", long.Parse(value.ToString()));
+                    global::NewRelic.Api.Agent.NewRelic.RecordResponseTimeMetric($"Custom/{metricName}", long.Parse(value.ToString()!));
                     break;
                 case MetricType.Counter:
                 case MetricType.Gauge:
                 case MetricType.Histogram:
                 case MetricType.Set:
-                    global::NewRelic.Api.Agent.NewRelic.RecordMetric($"Custom/{metricName}", float.Parse(value.ToString()));
+                    global::NewRelic.Api.Agent.NewRelic.RecordMetric($"Custom/{metricName}", float.Parse(value.ToString()!));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);

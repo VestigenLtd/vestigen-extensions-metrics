@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Vestigen.Extensions.Metrics.NewRelic.UnitTests.Internal
 {
-    public class DatadogTraceListener : TraceListener
+    public class NewRelicTraceListener : TraceListener
     {
         private readonly List<string> _strings;
         private readonly StringBuilder _partial;
         
-        public DatadogTraceListener()
+        public NewRelicTraceListener()
         {
             _strings = new List<string>();
             _partial = new StringBuilder();

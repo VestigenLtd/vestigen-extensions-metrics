@@ -85,16 +85,16 @@ namespace Vestigen.Extensions.Metrics.Datadog
             switch (type)
             {
                 case MetricType.Timer:
-                    _service.Timer(metricBuilder.ToString(), value, sampleRate, tags);
+                    _service.Timer(metricBuilder.ToString(), double.Parse(value.ToString()), sampleRate, tags);
                     break;
                 case MetricType.Counter:
-                    _service.Counter(metricBuilder.ToString(), value, sampleRate, tags);
+                    _service.Counter(metricBuilder.ToString(), double.Parse(value.ToString()), sampleRate, tags);
                     break;
                 case MetricType.Gauge:
-                    _service.Gauge(metricBuilder.ToString(), value, sampleRate, tags);
+                    _service.Gauge(metricBuilder.ToString(), double.Parse(value.ToString()), sampleRate, tags);
                     break;
                 case MetricType.Histogram:
-                    _service.Histogram(metricBuilder.ToString(), value, sampleRate, tags);
+                    _service.Histogram(metricBuilder.ToString(), double.Parse(value.ToString()), sampleRate, tags);
                     break;
                 case MetricType.Set:
                     _service.Set(metricBuilder.ToString(), value, sampleRate, tags);

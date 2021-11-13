@@ -117,14 +117,14 @@ namespace Vestigen.Extensions.Metrics.Datadog.UnitTests
             // Arrange
             const string statistic = "PushDataTest";
             var service = new Mock<IDogStatsd>();
-            service.Setup(x => x.Timer(statistic, It.IsAny<int>(), It.IsAny<double>(), It.IsAny<string[]>())).Verifiable();
+            service.Setup(x => x.Timer(statistic, It.IsAny<double>(), It.IsAny<double>(), It.IsAny<string[]>())).Verifiable();
             var sut = new DatadogMetric(service.Object);
 
             // Act
-            sut.Push<int>(MetricType.Timer, "PushDataTest", 1, 1, new string[]{} );
+            sut.Push(MetricType.Timer, "PushDataTest", 1d, 1, new string[]{} );
 
             // Assert
-            service.Verify(x => x.Timer(statistic, It.IsAny<int>(), It.IsAny<double>(), It.IsAny<string[]>()), Times.Once);
+            service.Verify(x => x.Timer(statistic, It.IsAny<double>(), It.IsAny<double>(), It.IsAny<string[]>()), Times.Once);
         }
         
         [Fact]
@@ -135,16 +135,16 @@ namespace Vestigen.Extensions.Metrics.Datadog.UnitTests
             const string statistic = "Scope1.PushDataTest";
             
             var service = new Mock<IDogStatsd>();
-            service.Setup(x => x.Timer(statistic, It.IsAny<int>(), It.IsAny<double>(), It.IsAny<string[]>())).Verifiable();
+            service.Setup(x => x.Timer(statistic, It.IsAny<double>(), It.IsAny<double>(), It.IsAny<string[]>())).Verifiable();
             service.CallBase = true;
             
             var sut = new DatadogMetric(service.Object);
 
             // Act
-            sut.Push<int>(MetricType.Timer, "PushDataTest", 1, 1, new string[]{} );
+            sut.Push(MetricType.Timer, "PushDataTest", 1d, 1, new string[]{} );
 
             // Assert
-            service.Verify(x => x.Timer(statistic, It.IsAny<int>(), It.IsAny<double>(), It.IsAny<string[]>()), Times.Once);
+            service.Verify(x => x.Timer(statistic, It.IsAny<double>(), It.IsAny<double>(), It.IsAny<string[]>()), Times.Once);
             scope1.Dispose();
         }
     }
