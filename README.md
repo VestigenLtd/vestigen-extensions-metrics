@@ -6,7 +6,13 @@ Metrics is a framework and set of abstractions for publishing metrics in an appl
 |Description|master|develop|
 |---|---|---|
 |Source code compilation|[![Build status - master](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/build/master?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/dotnet.yml?query=branch%3Amaster)|[![Build status - develop](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/build/develop?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/dotnet.yml?query=branch%3Adevelop)|
-|Security vulnerability analysis|[![Build status - master](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/security/master?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/codeql-analysis.yml?query=branch%3Amaster)|[![Build status - develop](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/security/develop?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/codeql-analysis.yml?query=branch%3Adevelop)|
+|Security vulnerability analysis|[![Security status - master](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/security/master?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/codeql-analysis.yml?query=branch%3Amaster)|[![Security status - develop](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/security/develop?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/codeql-analysis.yml?query=branch%3Adevelop)|
+
+Test CI branch
+
+[![Build status - master](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/build/github-actions?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/dotnet.yml?query=branch%3Agithub-actions)
+[![Security status - master](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/security/github-actions?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/codeql-analysis.yml?query=branch%3Agithub-actions)
+
 
 Overview
 --------

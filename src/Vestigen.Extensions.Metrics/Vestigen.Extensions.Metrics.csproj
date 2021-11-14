@@ -6,10 +6,9 @@
     <PackageProjectUrl>https://github.com/VestigenLtd/dotnet-extensions-metrics</PackageProjectUrl>
     <RepositoryUrl>https://github.com/VestigenLtd/dotnet-extensions-metrics</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageIcon>https://avatars2.githubusercontent.com/u/34891219?s=200</PackageIcon>
-    <PackageIconUrl>https://avatars2.githubusercontent.com/u/34891219?s=200</PackageIconUrl>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageLicenseFile>..\LICENSE.txt</PackageLicenseFile>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageIconUrl>logo.png</PackageIconUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageTags>vestigen extensions metrics</PackageTags>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
@@ -27,5 +26,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+  </ItemGroup>
+    <ItemGroup>
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="\"/>
+    <None Include="..\..\logo.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>
