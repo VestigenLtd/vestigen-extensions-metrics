@@ -1,5 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <Copyright>Copyright Vestigen 2021</Copyright>
+    <Authors>Vestigen</Authors>
+    <Company>Vestigen, Ltd.</Company>
+    <PackageProjectUrl>https://github.com/VestigenLtd/dotnet-extensions-metrics</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/VestigenLtd/dotnet-extensions-metrics</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageIcon>https://avatars2.githubusercontent.com/u/34891219?s=200</PackageIcon>
+    <PackageIconUrl>https://avatars2.githubusercontent.com/u/34891219?s=200</PackageIconUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageLicenseFile>..\LICENSE.txt</PackageLicenseFile>
+    <PackageTags>vestigen extensions metrics</PackageTags>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>0.0.0.0</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <TargetFrameworks>net6.0;netstandard2.1</TargetFrameworks>
     <LangVersion>default</LangVersion>
   </PropertyGroup>
