@@ -6,7 +6,9 @@
     <PackageProjectUrl>https://github.com/VestigenLtd/dotnet-extensions-metrics</PackageProjectUrl>
     <RepositoryUrl>https://github.com/VestigenLtd/dotnet-extensions-metrics</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageIconUrl>https://avatars2.githubusercontent.com/u/34891219?s=200</PackageIconUrl>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageIconUrl>logo.png</PackageIconUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageTags>vestigen extensions metrics ApplicationInsights</PackageTags>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
@@ -26,5 +28,9 @@
       <Project>{24B87E61-262E-4981-9044-236D0687DC86}</Project>
       <Name>Vestigen.Extensions.Metrics</Name>
     </ProjectReference>
+  </ItemGroup>
+    <ItemGroup>
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="\"/>
+    <None Include="..\..\logo.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>

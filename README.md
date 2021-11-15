@@ -1,24 +1,18 @@
 Metrics
 =======
 
-AppVeyor on master:
-
-[![Build status](https://ci.appveyor.com/api/projects/status/f3r19qows4jnko2r/branch/master?svg=true)](https://ci.appveyor.com/project/wholroyd/vestigen-extensions-metrics/branch/master)
-
-[![AppVeyor build](https://img.shields.io/appveyor/ci/vestigenltd/vestigen-extensions-metrics/master.svg?logo=appveyor)](https://ci.appveyor.com/project/vestigenLtd/vestigen-extensions-metrics/branch/master)
-
-[![AppVeyor tests](https://img.shields.io/appveyor/tests/vestigenltd/vestigen-extensions-metrics/master.svg?logo=appveyor)](https://ci.appveyor.com/project/vestigenLtd/vestigen-extensions-metrics/branch/master/tests)
-
-
-AppVeyor on develop:
-
-[![Build status](https://ci.appveyor.com/api/projects/status/f3r19qows4jnko2r/branch/develop?svg=true)](https://ci.appveyor.com/project/VestigenLtd/vestigen-extensions-metrics/branch/develop)
-
-[![AppVeyor build](https://img.shields.io/appveyor/ci/vestigenltd/vestigen-extensions-metrics/develop.svg?logo=appveyor)](https://ci.appveyor.com/project/vestigenLtd/vestigen-extensions-metrics/branch/develop)
-
-[![AppVeyor tests](https://img.shields.io/appveyor/tests/vestigenltd/vestigen-extensions-metrics/develop.svg?logo=appveyor)](https://ci.appveyor.com/project/vestigenLtd/vestigen-extensions-metrics/branch/develop/tests)
-
 Metrics is a framework and set of abstractions for publishing metrics in an application using providers for Datadog, NewRelic, CloudWatch, and simple debug output, based on StatsD-like interface.
+
+|Description|master|develop|
+|---|---|---|
+|Source code compilation|[![Build status - master](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/build/master?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/dotnet.yml?query=branch%3Amaster)|[![Build status - develop](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/build/develop?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/dotnet.yml?query=branch%3Adevelop)|
+|Security vulnerability analysis|[![Security status - master](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/security/master?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/codeql-analysis.yml?query=branch%3Amaster)|[![Security status - develop](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/security/develop?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/codeql-analysis.yml?query=branch%3Adevelop)|
+
+Test CI branch
+
+[![Build status - master](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/build/github-actions?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/dotnet.yml?query=branch%3Agithub-actions)
+[![Security status - master](https://shields.io/github/workflow/status/VestigenLtd/vestigen-extensions-metrics/security/github-actions?style=flat&logo=github)](https://github.com/VestigenLtd/vestigen-extensions-metrics/actions/workflows/codeql-analysis.yml?query=branch%3Agithub-actions)
+
 
 Overview
 --------
